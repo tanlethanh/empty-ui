@@ -1,0 +1,8 @@
+{
+  "name": "diamond-modal",
+  "version": "0.0.1",
+  "scripts": {
+    "publish": "npm publish --access public"
+  },
+  "packageManager": "yarn@4.2.2"
+}

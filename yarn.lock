@@ -2195,7 +2195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-arrow-functions@npm:^7.0.0, @babel/plugin-transform-arrow-functions@npm:^7.24.1":
+"@babel/plugin-transform-arrow-functions@npm:^7.0.0, @babel/plugin-transform-arrow-functions@npm:^7.0.0-0, @babel/plugin-transform-arrow-functions@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-transform-arrow-functions@npm:7.24.1"
   dependencies:
@@ -2537,7 +2537,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-nullish-coalescing-operator@npm:^7.24.1":
+"@babel/plugin-transform-nullish-coalescing-operator@npm:^7.0.0-0, @babel/plugin-transform-nullish-coalescing-operator@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-transform-nullish-coalescing-operator@npm:7.24.1"
   dependencies:
@@ -2599,7 +2599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-optional-chaining@npm:^7.24.1, @babel/plugin-transform-optional-chaining@npm:^7.24.5":
+"@babel/plugin-transform-optional-chaining@npm:^7.0.0-0, @babel/plugin-transform-optional-chaining@npm:^7.24.1, @babel/plugin-transform-optional-chaining@npm:^7.24.5":
   version: 7.24.5
   resolution: "@babel/plugin-transform-optional-chaining@npm:7.24.5"
   dependencies:
@@ -2747,7 +2747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-shorthand-properties@npm:^7.0.0, @babel/plugin-transform-shorthand-properties@npm:^7.24.1":
+"@babel/plugin-transform-shorthand-properties@npm:^7.0.0, @babel/plugin-transform-shorthand-properties@npm:^7.0.0-0, @babel/plugin-transform-shorthand-properties@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-transform-shorthand-properties@npm:7.24.1"
   dependencies:
@@ -2781,7 +2781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-template-literals@npm:^7.24.1":
+"@babel/plugin-transform-template-literals@npm:^7.0.0-0, @babel/plugin-transform-template-literals@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-transform-template-literals@npm:7.24.1"
   dependencies:
@@ -2981,7 +2981,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.13.0":
+"@babel/preset-typescript@npm:^7.13.0, @babel/preset-typescript@npm:^7.16.7":
   version: 7.24.1
   resolution: "@babel/preset-typescript@npm:7.24.1"
   dependencies:
@@ -7583,6 +7583,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"diamond-modal@workspace:packages/modal":
+  version: 0.0.0-use.local
+  resolution: "diamond-modal@workspace:packages/modal"
+  languageName: unknown
+  linkType: soft
+
+"diamond-toolkit@workspace:cli":
+  version: 0.0.0-use.local
+  resolution: "diamond-toolkit@workspace:cli"
+  bin:
+    diamond-toolkit: index.js
+  languageName: unknown
+  linkType: soft
+
 "diamond@workspace:.":
   version: 0.0.0-use.local
   resolution: "diamond@workspace:."
@@ -7605,6 +7619,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     react: "npm:18.2.0"
     react-native: "npm:0.74.1"
+    react-native-reanimated: "npm:^3.11.0"
     react-test-renderer: "npm:18.2.0"
     sst: "npm:^2.42.0"
     typescript: "npm:^5.4.5"
@@ -12520,6 +12535,26 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10/73b36281e58eeb27c9cc6031301b6ae19ecdc9f18ae2d518bdb39b0ac564e65c5779405d623f1df9abf378a13858b79442480244bd579968afc1faf9a2ce5e05
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated@npm:^3.11.0":
+  version: 3.11.0
+  resolution: "react-native-reanimated@npm:3.11.0"
+  dependencies:
+    "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
+    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
+    "@babel/plugin-transform-optional-chaining": "npm:^7.0.0-0"
+    "@babel/plugin-transform-shorthand-properties": "npm:^7.0.0-0"
+    "@babel/plugin-transform-template-literals": "npm:^7.0.0-0"
+    "@babel/preset-typescript": "npm:^7.16.7"
+    convert-source-map: "npm:^2.0.0"
+    invariant: "npm:^2.2.4"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+    react: "*"
+    react-native: "*"
+  checksum: 10/5ea68fa2c20bf98772a79e312adefb27aa8a97792849d6587d9e07eb5290c17745ad0bef5bc3343c0f0d8954ee81521deeb06399dc59f52723f0574df9c427b7
   languageName: node
   linkType: hard
 
