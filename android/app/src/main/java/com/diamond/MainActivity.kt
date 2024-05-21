@@ -1,4 +1,4 @@
-package com.diamond
+package com.empty
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

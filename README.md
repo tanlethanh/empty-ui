@@ -1,4 +1,4 @@
-# emtpy
+# empty
 
 - Simple, raw, logic only
 - Toolkit

@@ -1,5 +1,5 @@
 {
-  "name": "diamond-toolkit",
+  "name": "empty-toolkit",
   "version": "0.0.1",
   "bin": "index.js",
   "scripts": {

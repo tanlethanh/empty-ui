@@ -1,5 +1,5 @@
 {
-  "name": "diamond-modal",
+  "name": "empty-modal",
   "version": "0.0.1",
   "scripts": {
     "publish": "npm publish --access public"

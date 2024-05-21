@@ -7688,17 +7688,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diamond-modal@workspace:packages/modal":
+"empty-modal@workspace:packages/modal":
   version: 0.0.0-use.local
-  resolution: "diamond-modal@workspace:packages/modal"
+  resolution: "empty-modal@workspace:packages/modal"
   languageName: unknown
   linkType: soft
 
-"diamond-toolkit@workspace:cli":
+"empty-toolkit@workspace:cli":
   version: 0.0.0-use.local
-  resolution: "diamond-toolkit@workspace:cli"
+  resolution: "empty-toolkit@workspace:cli"
   bin:
-    diamond-toolkit: index.js
+    empty-toolkit: index.js
   languageName: unknown
   linkType: soft
 
