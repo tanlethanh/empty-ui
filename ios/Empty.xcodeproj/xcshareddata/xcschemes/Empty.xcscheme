@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Diamond.app"
-               BlueprintName = "Diamond"
-               ReferencedContainer = "container:Diamond.xcodeproj">
+               BuildableName = "Empty.app"
+               BlueprintName = "Empty"
+               ReferencedContainer = "container:Empty.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "DiamondTests.xctest"
-               BlueprintName = "DiamondTests"
-               ReferencedContainer = "container:Diamond.xcodeproj">
+               BuildableName = "EmptyTests.xctest"
+               BlueprintName = "EmptyTests"
+               ReferencedContainer = "container:Empty.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Diamond.app"
-            BlueprintName = "Diamond"
-            ReferencedContainer = "container:Diamond.xcodeproj">
+            BuildableName = "Empty.app"
+            BlueprintName = "Empty"
+            ReferencedContainer = "container:Empty.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Diamond.app"
-            BlueprintName = "Diamond"
-            ReferencedContainer = "container:Diamond.xcodeproj">
+            BuildableName = "Empty.app"
+            BlueprintName = "Empty"
+            ReferencedContainer = "container:Empty.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
