@@ -15,6 +15,14 @@ export enum Align {
 	 * I prefer using this one when I need center something and the content has its size
 	 */
 	CenterCenter = 'CenterCenter',
+	/**
+	 * Full align make ModalComponent shrink to full an axis,
+	 * but the measurement happen after first render to get layout rectangle,
+	 * so we need to use offset to create initial position to make Component
+	 * full without waiting for layout
+	 */
+	FullCenter = 'FullCenter',
+	FullBottom = 'FullBottom',
 }
 
 export type ModalConfig = {
@@ -27,6 +35,14 @@ export type ModalConfig = {
 	 * so you might need to make it 'absolute' position and place it by yourself
 	 */
 	align?: Align;
+	/**
+	 * apply horizontal offset like horizontal padding, only used with `X == Full`
+	 */
+	xOffset?: number;
+	/**
+	 * apply vertical offset like vertical padding, only used with `Y == Full`
+	 */
+	yOffset?: number;
 };
 
 export const modalConfigMap = proxy<Record<string, ModalConfig>>({});
@@ -52,23 +68,54 @@ export const showModal = (component: ReactNode, config: ModalConfig) => {
 };
 
 export type Position = {
-	top: number;
-	bottom: number;
-	left: number;
-	right: number;
+	top?: number;
+	bottom?: number;
+	left?: number;
+	right?: number;
+	opacity?: number;
 };
 
-export const calculatePosition = (
-	parent: LayoutRectangle,
-	child: LayoutRectangle,
-	align: Align,
-): Position => {
+export type CalculateOptions = {
+	parent?: LayoutRectangle;
+	child?: LayoutRectangle;
+	config: ModalConfig;
+};
+
+export const calculatePosition = ({
+	parent,
+	child,
+	config: { align, xOffset = 0 },
+}: CalculateOptions): Position | null => {
 	if (align === Align.CenterCenter) {
+		if (!parent || !child) return null;
 		return {
 			top: (parent.height - child.height) / 2,
 			bottom: (parent.height - child.height) / 2,
 			left: (parent.width - child.width) / 2,
 			right: (parent.width - child.width) / 2,
+		};
+	} else if (align === Align.FullCenter) {
+		if (!parent || !child)
+			/**
+			 * This initial position make element width persistent,
+			 * opacity is used to hide element for persistent animation
+			 */
+			return {
+				left: xOffset,
+				right: xOffset,
+				opacity: 0,
+			};
+		return {
+			top: (parent.height - child.height) / 2,
+			bottom: (parent.height - child.height) / 2,
+			left: xOffset,
+			right: xOffset,
+		};
+	} else if (align === Align.FullBottom) {
+		return {
+			bottom: 0,
+			left: xOffset,
+			right: xOffset,
 		};
 	} else {
 		throw Error(`not supported alignment: ${align}`);

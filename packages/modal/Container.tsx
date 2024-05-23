@@ -16,15 +16,14 @@ type Props = {
 export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 	const component = modalComponentMap[config.id];
 	const [layout, setLayout] = useState<LayoutRectangle>();
-	const containerRef = useRef(null);
+	const containerRef = useRef<View>(null);
 
 	if (!config.align) {
 		return <Fragment key={config.id}>{component}</Fragment>;
 	}
 
 	const position = useMemo(() => {
-		if (!layout || !parentLayout || !config.align) return null;
-		return calculatePosition(parentLayout, layout, config.align);
+		return calculatePosition({ parent: parentLayout, child: layout, config });
 	}, [layout, parentLayout]);
 
 	const handleLayout = (e: LayoutChangeEvent) => {
