@@ -1,9 +1,11 @@
 import React from 'react';
-import HomeScreen from './screens/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import FunnyBallScreen from './screens/FunnyBall';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import HomeScreen from './screens/Home';
+import FunnyBallScreen from './screens/FunnyBall';
+import ModalPlayground from './screens/ModalPlayground';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +14,11 @@ function App() {
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<NavigationContainer>
 				<Stack.Navigator>
+					<Stack.Screen
+						options={{ headerShown: false }}
+						name="ModalPlayground"
+						component={ModalPlayground}
+					/>
 					<Stack.Screen
 						options={{ headerShown: false }}
 						name="FunnyBall"

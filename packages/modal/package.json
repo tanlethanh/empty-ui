@@ -4,5 +4,14 @@
   "scripts": {
     "publish": "npm publish --access public"
   },
-  "packageManager": "yarn@4.2.2"
+  "peerDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.72.0",
+    "react": "^18.2.0",
+    "react-native": "^0.72.0"
+  },
+  "packageManager": "yarn@4.2.2",
+  "dependencies": {
+    "valtio": "^1.13.2"
+  }
 }
