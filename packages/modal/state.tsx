@@ -3,9 +3,16 @@ import type { ReactNode } from 'react';
 import type { LayoutRectangle } from 'react-native';
 import { proxy } from 'valtio';
 
+/**
+ * XY alignment, X is x-axis (horizontal) layout measurement, Y is y-axis (vertical) layout measurement
+ */
 export enum Align {
 	/**
-	 * ModalComponent will be placed in center of both x-axis and y-axis
+	 * ModalComponent will be placed in center of both x-axis and y-axis.
+	 * Layout calculation bases on center of Rectangle layout of Component,
+	 * so you need to setup height width of component by yourself.
+	 *
+	 * I prefer using this one when I need center something and the content has its size
 	 */
 	CenterCenter = 'CenterCenter',
 }

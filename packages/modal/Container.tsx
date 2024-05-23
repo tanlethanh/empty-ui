@@ -1,4 +1,4 @@
-import { type FC, Fragment, useState } from 'react';
+import { type FC, Fragment, useState, useMemo, useRef } from 'react';
 import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 
@@ -16,15 +16,16 @@ type Props = {
 export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 	const component = modalComponentMap[config.id];
 	const [layout, setLayout] = useState<LayoutRectangle>();
+	const containerRef = useRef(null);
 
 	if (!config.align) {
 		return <Fragment key={config.id}>{component}</Fragment>;
 	}
 
-	const position =
-		layout && parentLayout
-			? calculatePosition(parentLayout, layout, config.align)
-			: {};
+	const position = useMemo(() => {
+		if (!layout || !parentLayout || !config.align) return null;
+		return calculatePosition(parentLayout, layout, config.align);
+	}, [layout, parentLayout]);
 
 	const handleLayout = (e: LayoutChangeEvent) => {
 		setLayout(e.nativeEvent.layout);
@@ -32,7 +33,8 @@ export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 
 	return (
 		<View
-			style={[styles.alignmentContainer, position]}
+			ref={containerRef}
+			style={[styles.alignmentContainer, position || styles.hidden]}
 			key={config.id}
 			onLayout={handleLayout}
 		>
@@ -46,5 +48,9 @@ export default ModalContainer;
 const styles = StyleSheet.create({
 	alignmentContainer: {
 		position: 'absolute',
+	},
+	// hidden to wait for first render to prevent animation breaking
+	hidden: {
+		opacity: 0,
 	},
 });
