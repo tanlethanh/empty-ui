@@ -145,4 +145,7 @@ const sampleTitles = [
 	"I don't know",
 	'What is this?',
 	'Hihi',
+	'I love myself',
+	'What a moment!',
+	'Sometime I feel tired',
 ];
