@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from 'react-native';
 import { Align, ModalProvider, showModal } from 'empty-modal';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Animated, { SlideInDown, SlideOutDown } from 'react-native-reanimated';
 import Button from 'components/Button';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,13 +9,14 @@ export const ModalPlayground = () => {
 	const clearCenterCenterRef = useRef<(() => void) | null>(null);
 	const clearFullCenterRef = useRef<(() => void) | null>(null);
 	const clearFullBottomRef = useRef<(() => void) | null>(null);
+	const [title, setTitle] = useState('Yeahhhhhhhhh!');
 
 	const handlePressCenterCenter = () => {
 		if (clearCenterCenterRef.current) {
 			clearCenterCenterRef.current();
 			clearCenterCenterRef.current = null;
 		} else {
-			const { cleanModal } = showModal(<SimpleModal />, {
+			const { cleanModal } = showModal(<SimpleModal title={title} />, {
 				id: 'simple-modal-center-center',
 				align: Align.CenterCenter,
 			});
@@ -28,7 +29,7 @@ export const ModalPlayground = () => {
 			clearFullCenterRef.current();
 			clearFullCenterRef.current = null;
 		} else {
-			const { cleanModal } = showModal(<SimpleModal />, {
+			const { cleanModal } = showModal(<SimpleModal title={title} />, {
 				id: 'simple-modal-full-center',
 				align: Align.FullCenter,
 				xOffset: 10,
@@ -42,13 +43,21 @@ export const ModalPlayground = () => {
 			clearFullBottomRef.current();
 			clearFullBottomRef.current = null;
 		} else {
-			const { cleanModal } = showModal(<BottomSheet />, {
+			const { cleanModal } = showModal(<BottomSheet title={title} />, {
 				id: 'bottom-sheet',
 				align: Align.FullBottom,
 			});
 			clearFullBottomRef.current = cleanModal;
 		}
 	};
+
+	useEffect(() => {
+		setInterval(() => {
+			const randomIndex = Math.floor(Math.random() * (sampleTitles.length - 1));
+			const newTitle = sampleTitles[randomIndex];
+			setTitle(newTitle);
+		}, 1000);
+	}, []);
 
 	return (
 		<ModalProvider>
@@ -61,26 +70,26 @@ export const ModalPlayground = () => {
 	);
 };
 
-const SimpleModal = () => {
+const SimpleModal = ({ title }: { title: string }) => {
 	return (
 		<Animated.View
 			style={styles.simpleModalContainer}
 			entering={SlideInDown}
 			exiting={SlideOutDown}
 		>
-			<Text style={styles.title}>Hello world</Text>
+			<Text style={styles.title}>{title}</Text>
 		</Animated.View>
 	);
 };
 
-const BottomSheet = () => {
+const BottomSheet = ({ title }: { title: string }) => {
 	return (
 		<Animated.View
 			style={styles.bottomSheet}
 			entering={SlideInDown}
 			exiting={SlideOutDown}
 		>
-			<Text style={styles.bottomSheetTitle}>Hello world</Text>
+			<Text style={styles.bottomSheetTitle}>{title}</Text>
 		</Animated.View>
 	);
 };
@@ -113,7 +122,7 @@ const styles = StyleSheet.create({
 		color: '#000',
 	},
 	bottomSheet: {
-		height: 450,
+		height: 340,
 		padding: 20,
 		paddingHorizontal: 40,
 		alignItems: 'center',
@@ -121,7 +130,19 @@ const styles = StyleSheet.create({
 		borderColor: '#ffffff',
 		backgroundColor: '#ffffff',
 		borderBottomWidth: 0,
-		borderTopLeftRadius: 40,
-		borderTopRightRadius: 40,
+		borderTopLeftRadius: 30,
+		borderTopRightRadius: 30,
 	},
 });
+
+const sampleTitles = [
+	'Hello world',
+	'Hi lover',
+	'Hmmm',
+	'Fuck?????',
+	'What the hell?',
+	'Hehehe',
+	"I don't know",
+	'What is this?',
+	'Hihi',
+];

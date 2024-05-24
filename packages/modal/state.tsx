@@ -8,7 +8,7 @@ import { proxy } from 'valtio';
  */
 export enum Align {
 	/**
-	 * ModalComponent will be placed in center of both x-axis and y-axis.
+	 * ModalNode will be placed in center of both x-axis and y-axis.
 	 * Layout calculation bases on center of Rectangle layout of Component,
 	 * so you need to setup height width of component by yourself.
 	 *
@@ -16,7 +16,7 @@ export enum Align {
 	 */
 	CenterCenter = 'CenterCenter',
 	/**
-	 * Full align make ModalComponent shrink to full an axis,
+	 * Full align make ModalNode shrink to full an axis,
 	 * but the measurement happen after first render to get layout rectangle,
 	 * so we need to use offset to create initial position to make Component
 	 * full without waiting for layout
@@ -30,7 +30,7 @@ export type ModalConfig = {
 	showBackdrop?: boolean;
 	/**
 	 * Align is predefined layout alignment,
-	 * if not using this alignment, the ModalComponent will be
+	 * if not using this alignment, the ModalNode will be
 	 * placed under your App children inside ModalProvider,
 	 * so you might need to make it 'absolute' position and place it by yourself
 	 */
@@ -45,19 +45,22 @@ export type ModalConfig = {
 	yOffset?: number;
 };
 
+export const modalMap: Record<string, ReactNode> = {};
 export const modalConfigMap = proxy<Record<string, ModalConfig>>({});
 
-export const modalComponentMap: Record<string, ReactNode> = {};
-
 export const cleanModal = (id: string) => {
-	delete modalComponentMap[id];
+	delete modalMap[id];
 	delete modalConfigMap[id];
 };
 
-export const showModal = (component: ReactNode, config: ModalConfig) => {
-	delete modalComponentMap[config.id];
+/**
+ * The initial props of the passed ReactNode will not updated as the state updating.
+ * So you might not want to manage state outside of this ReactNode
+ */
+export const showModal = (node: ReactNode, config: ModalConfig) => {
+	delete modalMap[config.id];
 	delete modalConfigMap[config.id];
-	modalComponentMap[config.id] = component;
+	modalMap[config.id] = node;
 	modalConfigMap[config.id] = config;
 
 	return {

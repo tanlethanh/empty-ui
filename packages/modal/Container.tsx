@@ -2,11 +2,7 @@ import { type FC, Fragment, useState, useMemo, useRef } from 'react';
 import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 
-import {
-	calculatePosition,
-	modalComponentMap,
-	type ModalConfig,
-} from './state';
+import { calculatePosition, modalMap, type ModalConfig } from './state';
 
 type Props = {
 	config: ModalConfig;
@@ -14,12 +10,12 @@ type Props = {
 };
 
 export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
-	const component = modalComponentMap[config.id];
+	const modalNode = modalMap[config.id];
 	const [layout, setLayout] = useState<LayoutRectangle>();
 	const containerRef = useRef<View>(null);
 
 	if (!config.align) {
-		return <Fragment key={config.id}>{component}</Fragment>;
+		return <Fragment key={config.id}>{modalNode}</Fragment>;
 	}
 
 	const position = useMemo(() => {
@@ -37,7 +33,7 @@ export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 			key={config.id}
 			onLayout={handleLayout}
 		>
-			{component}
+			{modalNode}
 		</View>
 	);
 };
