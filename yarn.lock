@@ -7856,9 +7856,8 @@ __metadata:
     valtio: "npm:^1.13.2"
   peerDependencies:
     "@types/react": ^18.2.0
-    "@types/react-native": ^0.72.0
     react: ^18.2.0
-    react-native: ^0.72.0
+    react-native: ^0.72.0 || ^0.73.0
   languageName: unknown
   linkType: soft
 
