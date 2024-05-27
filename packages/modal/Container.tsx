@@ -1,13 +1,8 @@
 import { type FC, Fragment, useState, useMemo, useRef } from 'react';
 import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import {
-	calculatePosition,
-	cleanModal,
-	modalMap,
-	type ModalConfig,
-} from './state';
+import { calculatePosition, modalMap, type ModalConfig } from './state';
 
 type Props = {
 	config: ModalConfig;
@@ -17,7 +12,7 @@ type Props = {
 export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 	const modalNode = modalMap[config.id];
 	const [layout, setLayout] = useState<LayoutRectangle>();
-	const containerRef = useRef<TouchableWithoutFeedback>(null);
+	const containerRef = useRef<View>(null);
 
 	if (!config.align) {
 		return <Fragment key={config.id}>{modalNode}</Fragment>;
@@ -32,15 +27,14 @@ export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 	};
 
 	return (
-		<TouchableWithoutFeedback
+		<View
 			ref={containerRef}
 			style={[styles.alignmentContainer, position || styles.hidden]}
 			key={config.id}
 			onLayout={handleLayout}
-			onPress={() => config.showBackdrop && cleanModal(config.id)}
 		>
 			{modalNode}
-		</TouchableWithoutFeedback>
+		</View>
 	);
 };
 
