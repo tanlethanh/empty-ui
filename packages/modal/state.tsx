@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import type { LayoutRectangle } from 'react-native';
 import { proxy } from 'valtio';
 
@@ -25,6 +26,8 @@ export enum Align {
 	FullBottom = 'FullBottom',
 }
 
+export type GeneralModalConfig = ModalConfig | ModalWithComponentConfig<any>;
+
 export type ModalConfig = {
 	id: string;
 	showBackdrop?: boolean;
@@ -45,11 +48,13 @@ export type ModalConfig = {
 	yOffset?: number;
 };
 
-export const modalMap: Record<string, ReactNode> = {};
-export const modalConfigMap = proxy<Record<string, ModalConfig>>({});
+export const modalNodeMap: Record<string, ReactNode> = {};
+export const modalComponentMap: Record<string, FC<any>> = {};
+export const modalConfigMap = proxy<Record<string, GeneralModalConfig>>({});
 
 export const cleanModal = (id: string) => {
-	delete modalMap[id];
+	delete modalNodeMap[id];
+	delete modalComponentMap[id];
 	delete modalConfigMap[id];
 };
 
@@ -58,9 +63,36 @@ export const cleanModal = (id: string) => {
  * So you might not want to manage state outside of this ReactNode
  */
 export const showModal = (node: ReactNode, config: ModalConfig) => {
-	delete modalMap[config.id];
+	delete modalNodeMap[config.id];
 	delete modalConfigMap[config.id];
-	modalMap[config.id] = node;
+	modalNodeMap[config.id] = node;
+	modalConfigMap[config.id] = config;
+
+	return {
+		cleanModal: () => {
+			cleanModal(config.id);
+		},
+	};
+};
+
+export type ModalWithComponentConfig<Props> = {
+	/**
+	 * Must add this props object to correctly render Component, distinguish with ReactNode
+	 */
+	props: Props;
+} & ModalConfig;
+
+/**
+ * The initial props of the passed ReactNode will not updated as the state updating.
+ * So you might not want to manage state outside of this ReactNode
+ */
+export const showModalWithComponent = <T,>(
+	component: FC<T>,
+	config: ModalWithComponentConfig<T>,
+) => {
+	delete modalComponentMap[config.id];
+	delete modalConfigMap[config.id];
+	modalComponentMap[config.id] = component;
 	modalConfigMap[config.id] = config;
 
 	return {

@@ -2,20 +2,31 @@ import { type FC, Fragment, useState, useMemo, useRef } from 'react';
 import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 
-import { calculatePosition, modalMap, type ModalConfig } from './state';
+import {
+	calculatePosition,
+	modalComponentMap,
+	modalNodeMap,
+	type GeneralModalConfig,
+} from './state';
 
 type Props = {
-	config: ModalConfig;
+	config: GeneralModalConfig;
 	parentLayout?: LayoutRectangle;
 };
 
 export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
-	const modalNode = modalMap[config.id];
+	const isComponent = 'props' in config;
+	const modalNode = modalNodeMap[config.id];
+	const ModalComponent = modalComponentMap[config.id];
 	const [layout, setLayout] = useState<LayoutRectangle>();
 	const containerRef = useRef<View>(null);
 
 	if (!config.align) {
-		return <Fragment key={config.id}>{modalNode}</Fragment>;
+		return (
+			<Fragment>
+				{isComponent ? <ModalComponent {...config.props} /> : modalNode}
+			</Fragment>
+		);
 	}
 
 	const position = useMemo(() => {
@@ -27,14 +38,27 @@ export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 	};
 
 	return (
-		<View
-			ref={containerRef}
-			style={[styles.alignmentContainer, position || styles.hidden]}
-			key={config.id}
-			onLayout={handleLayout}
-		>
-			{modalNode}
-		</View>
+		<Fragment>
+			{isComponent ? (
+				<ModalComponent
+					style={[
+						styles.alignmentContainer,
+						position || styles.hidden,
+						config.props?.styles,
+					]}
+					ref={containerRef}
+					{...config.props}
+				/>
+			) : (
+				<View
+					ref={containerRef}
+					style={[styles.alignmentContainer, position || styles.hidden]}
+					onLayout={handleLayout}
+				>
+					{modalNode}
+				</View>
+			)}
+		</Fragment>
 	);
 };
 
