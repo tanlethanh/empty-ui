@@ -31,6 +31,7 @@ export type GeneralModalConfig = ModalConfig | ModalWithComponentConfig<any>;
 export type ModalConfig = {
 	id: string;
 	showBackdrop?: boolean;
+	onPressBackdrop?: () => void;
 	/**
 	 * Align is predefined layout alignment,
 	 * if not using this alignment, the ModalNode will be

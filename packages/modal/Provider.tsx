@@ -23,8 +23,9 @@ export const ModalProvider: FC<Props> = ({ children }) => {
 	};
 
 	const handlePressBackdrop = () => {
-		const { id } = configs[configs.length - 1];
+		const { id, onPressBackdrop } = configs[configs.length - 1];
 		cleanModal(id);
+		onPressBackdrop?.();
 	};
 
 	return (
