@@ -58,6 +58,8 @@ export const ModalContainer: FC<Props> = ({ config, parentLayout }) => {
 					{modalNode}
 				</View>
 			)}
+
+			{config.FloatComponent && <config.FloatComponent />}
 		</Fragment>
 	);
 };

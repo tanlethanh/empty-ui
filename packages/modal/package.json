@@ -1,6 +1,6 @@
 {
   "name": "empty-modal",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "scripts": {
     "publish": "npm publish --access public"
   },

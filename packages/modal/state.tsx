@@ -49,6 +49,9 @@ export type ModalConfig = {
 	 * apply vertical offset like vertical padding, only used with `Y == Full`
 	 */
 	yOffset?: number;
+
+	/** Place a float Component inside Modal Container, positioning by yourself*/
+	FloatComponent?: FC<any>;
 };
 
 const defaultConfig = {
