@@ -31,6 +31,8 @@ export type GeneralModalConfig = ModalConfig | ModalWithComponentConfig<any>;
 export type ModalConfig = {
 	id: string;
 	showBackdrop?: boolean;
+	/** default True */
+	closeOnPressBackdrop?: boolean;
 	onPressBackdrop?: () => void;
 	/**
 	 * Align is predefined layout alignment,
@@ -47,6 +49,10 @@ export type ModalConfig = {
 	 * apply vertical offset like vertical padding, only used with `Y == Full`
 	 */
 	yOffset?: number;
+};
+
+const defaultConfig = {
+	closeOnPressBackdrop: true,
 };
 
 export const modalNodeMap: Record<string, ReactNode> = {};
@@ -67,7 +73,7 @@ export const showModal = (node: ReactNode, config: ModalConfig) => {
 	delete modalNodeMap[config.id];
 	delete modalConfigMap[config.id];
 	modalNodeMap[config.id] = node;
-	modalConfigMap[config.id] = config;
+	modalConfigMap[config.id] = { ...defaultConfig, ...config };
 
 	return {
 		cleanModal: () => {
@@ -94,7 +100,7 @@ export const showModalWithComponent = <T,>(
 	delete modalComponentMap[config.id];
 	delete modalConfigMap[config.id];
 	modalComponentMap[config.id] = component;
-	modalConfigMap[config.id] = config;
+	modalConfigMap[config.id] = { ...defaultConfig, ...config };
 
 	return {
 		cleanModal: () => {
