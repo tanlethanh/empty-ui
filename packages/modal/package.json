@@ -1,8 +1,8 @@
 {
-  "name": "empty-modal",
-  "version": "0.0.10",
+  "name": "@emptyui/modal",
+  "version": "0.0.1",
   "scripts": {
-    "publish": "npm publish --access public"
+    "release": "npm publish --access public"
   },
   "peerDependencies": {
     "@types/react": "^18.2.0",

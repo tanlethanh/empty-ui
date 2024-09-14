@@ -3097,6 +3097,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emptyui/modal@workspace:packages/modal":
+  version: 0.0.0-use.local
+  resolution: "@emptyui/modal@workspace:packages/modal"
+  dependencies:
+    valtio: "npm:^1.13.2"
+  peerDependencies:
+    "@types/react": ^18.2.0
+    react: ^18.2.0
+    react-native: ^0.72.0 || ^0.73.0
+  languageName: unknown
+  linkType: soft
+
 "@envelop/core@npm:^3.0.4":
   version: 3.0.6
   resolution: "@envelop/core@npm:3.0.6"
@@ -7848,18 +7860,6 @@ __metadata:
   checksum: 10/915acf859cea7131dac1b2b5c9c8e35c4849e325a1d114c30adb8cd615970f6dca0e27f64f3a4949d7d6ed86ecd79a1c5c63f02e697513cddd7b5835c90948b8
   languageName: node
   linkType: hard
-
-"empty-modal@workspace:packages/modal":
-  version: 0.0.0-use.local
-  resolution: "empty-modal@workspace:packages/modal"
-  dependencies:
-    valtio: "npm:^1.13.2"
-  peerDependencies:
-    "@types/react": ^18.2.0
-    react: ^18.2.0
-    react-native: ^0.72.0 || ^0.73.0
-  languageName: unknown
-  linkType: soft
 
 "empty-toolkit@workspace:cli":
   version: 0.0.0-use.local
